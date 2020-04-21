@@ -1,0 +1,154 @@
+﻿/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07/03/2017, 10:33:25 AM
+    Author     : dteran
+*/
+.fondositio{
+    background-color: #228B22 !important;
+	color: #ffffff !important;	
+}
+.fondoconte{
+	background-color: #FFFFFF !important;	
+}
+.subtitulo{
+	
+	color: #000000 !important;
+    text-align:left !important;
+    
+}
+.fondoinicio{
+	background-color: #228B22 !important;
+	color: #ffffff;	
+}
+.fondoprincipal
+{
+	background-color: #212A34 !important;
+	color: #ffffff;
+}
+.fondopagina
+{
+	background-color: #228B22 !important;
+}
+.fondobarra
+{
+	background-color: #EDEDED !important;
+}
+.fondoalerta
+{
+	background-color: #749946 !important;
+	border-color: #0f0f0f;
+}
+.fondomodal
+{	
+	background-color: #F9F9F9 !important;
+	color: #23527C !important;
+}
+
+.fondototales
+{
+	background-color: #A7C36A !important;
+	color: #0F0F0F;
+}
+
+.legend {
+                font-size: 0.8pc;
+                float: right;
+                color:#0f0f0f;
+                width:8%;
+                text-align: center;
+                font-weight:bold;
+}
+.colRight {
+                text-align: right;
+}
+.colLeft {
+                text-align: left;
+}     
+.colCenter{
+                text-align: center;
+} 
+.fondocajatexto
+{
+	background-color: #E1E1E1 !important;
+	color: #ffffff;
+}
+.fondoseleccionar
+{
+	background-color: #B9B9B9 !important;
+	color: #ffffff;
+}
+.fondobutton
+{
+	/* background-color: #008D4C !important; */
+	background-color: #A7C36A !important;
+	/*background-color: #B3E9A6 !important;*/
+	/*color: #ffffff;*/
+}
+.fondoicono
+{
+	background-color: #B9B9B9 !important;
+	color: #ffffff;
+}
+.coloricono
+{
+	color: #ffffff !important;
+	background-color: #ffffff;
+}
+
+.colorpendiente
+{
+	color: #ffffff !important;
+	background-color: #F7E0BF
+}
+.coloraprobado
+{
+	color: #ffffff !important;
+	background-color: #BDE2B5
+}
+.colorprocesado
+{
+	color: #ffffff !important;
+	background-color: #C2FFEE
+}
+.colorcancelado
+{
+	color: #ffffff !important;
+	background-color: #F7C0BF
+}
+.colorprocesocancelacion
+{
+	color: #ffffff !important;
+	background-color: #C2F2FF
+}
+
+/*.nav.side-menu > li.active > a {
+    background-color:#37B955 !important;
+}*/
+.colorrechazado
+{
+	color: #ffffff !important;
+	background-color: #F7C0BF
+}
+
+.datepicker{z-index:1151 !important;}
+
+.rowInput {
+                    max-width: 85%;
+                    margin-left: 10px;
+                    padding-right: 0px;
+
+}
+
+.LisDatos {
+                    font-size: 8px;
+}
+
+.colRight {
+                text-align: right;
+            }
+
+      

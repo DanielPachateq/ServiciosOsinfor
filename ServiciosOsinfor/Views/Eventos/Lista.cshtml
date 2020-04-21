@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Entidades.Eventos>
+<section class="content-header">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="page-head-line"> Publicaciones / <a href="~/publicacion/nuevo">Nuevo Registro</a></h3>
+        </div>
+    </div>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">Filtrar por</div>
+                    <form class="form-horizontal">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label for="selectorTipo" class="col-md-4 col-lg-3 control-label">Tipo de movimiento</label>
+                                <div class="col-md-4 col-lg-3">
+                                    <select id="selectorTipo" class="form-control">
+                                        <option value="1">Listado Concursos</option>
+                                        <option value="2">Cobertura por Dex</option>
+                                        <option value="3">Cobertura por Territorio</option>
+                                        <option value="99" selected>Todos</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 col-lg-6 ">
+                                    <button type="button" class="btn btn-primary" id="btnBuscar"><span class="fa fa-check"></span> Buscar</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="selectorEstado" class="col-md-4 col-lg-3 control-label">Estado</label>
+                                <div class="col-md-4 col-lg-3">
+                                    <select id="selectorEstado" class="form-control">
+                                        <option value="1">Pendiente</option>
+                                        <!--<option value="2">Aprobado</option>-->
+                                        <!--option value="3">Cancelado</!--option>-->
+                                        <option value="4">Publicado</option>
+                                        <option value="99" selected>Todos</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 col-lg-6 ">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <table class="table table-bordered table-striped display" id="LisDatos"></table>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="example-modal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="dlgDel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro de borrar el item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+                    <a href="#" class="btn btn-primary" id="btnDel">Sí</a>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+<div class="example-modal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="dlgInfo" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Información</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="info"></p><label id="mensaje"></label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modaldetalle" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="alert alert-success alert-dismissible" id="dlgAlert">
+            <button type="button" class="close" aria-hidden="true" id="closeAlert">&times;</button>
+            <h4><i class="icon fa fa-check-circle"></i> Atención!</h4>
+            <span id="msgAlert"></span>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Detalles de Publicación</b></h4>
+            </div>
+            <div class="modal-body">
+                modal-body
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-primary" id="btnAprobar" name="btnAprobar"><span class="fa fa-check"></span> Aprobar</button>-->
+                <button type="button" class="btn btn-primary" id="btnPublicar" name="btnPublicar"><span class="fa fa-times"></span> Publicar</button>
+                <button type="button" class="btn btn-danger" id="btnSalir"><span class="fa fa-sign-out"></span> Salir</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</table>

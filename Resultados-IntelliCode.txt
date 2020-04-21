@@ -1,0 +1,2 @@
+﻿[VSIX I] Trace log: C:\Users\dteran.LOYALTY\AppData\Local\Temp\VSFeedbackIntelliCodeLogs\20190813_135843_VS.log
+[VSIX I] Version: 2.2.182.4985

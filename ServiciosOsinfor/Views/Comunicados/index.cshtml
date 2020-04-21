@@ -1,0 +1,168 @@
+﻿@model IEnumerable<Entidades.Comunicados>
+@{
+    ViewBag.Title = "Registro Inicio";
+}
+<section class="content-header">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="page-head-line">Mantenimiento Inicio / <a href="~/fuerzaventa/nuevo">Nuevo Registro</a></h3>
+        </div>
+    </div>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <table class="table table-bordered table-striped display" style="font-size:12px" id="LisDatos"></table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="example-modal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="dlgDel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro de borrar el item?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+                    <a href="#" class="btn btn-primary" id="btnDel">Sí</a>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modaldetalle" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="alert alert-success alert-dismissible" id="dlgAlert">
+            <button type="button" class="close" aria-hidden="true" id="closeAlert">&times;</button>
+            <h4><i class="icon fa fa-check-circle"></i> Atención!</h4>
+            <span id="msgAlert"></span>
+        </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Detalles de Publicación</b></h4>
+            </div>
+            <div class="modal-body">
+                modal-body
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnSalir"><span class="fa fa-sign-out"></span> Salir</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal-->
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            mostrarGrid();
+            function mostrarGrid() {
+                $("#LisDatos").DataTable({
+                    "bProcessing": false,
+                    "bServerSide": false,
+                    "destroy": true,
+                    "ajax": {
+                        "url": "/comunicados/ListaComunicados",
+                        "type": "POST"
+                    },
+                    "language": {
+                        "url": "/Content/js/plugins/datatables/datatables.es.json"
+                    },
+                    "lengthMenu": [[25, 35, 50, -1], [25, 35, 50, "All"]],
+                    "pagingType": "simple_incremental_bootstrap",
+                    "columns": [
+                        { "data": "Codigo", "title": "Codigo" },
+                        { "data": "Nombre", "title": "Fuerza Venta" },
+                        { "data": "UserCreo", "title": "Usuario Creo", "orderable": false },
+                        { "data": "FechaCreo", "title": "Fecha Creo", "orderable": false },
+                        { "data": "UserModifico", "title": "Usuario Modifico", "orderable": false },
+                        { "data": "FechaModifico", "title": "Fecha Modifico", "orderable": false },
+                        { "data": "Estado", "title": "Estado" },
+                        { "data": null, "defaultContent": "", "title": "", "orderable": false },//editar
+                        //{ "data": null, "defaultContent": "", "title": "", "orderable": false },//ver
+                        { "data": null, "defaultContent": "", "title": "", "orderable": false }//ver
+                    ],
+                    "createdRow": function (row, data, dataIndex) {
+                        $(row).attr('uid', data.codigo);
+                        $(row).attr('estado', data.Estado);
+                        $(row).addClass('trUID');
+
+                        curCell = $('td', row);
+
+                        switch (data.Estado) {
+                            case "Bloqueado":
+                                //curCell.html("Aprobado");
+                                curCell.css('color', "#880404");
+                                break;
+                        }
+
+                        //permisos para editar
+                        curCell = $('td', row).eq(7);
+                        curCell.html("<a id=\"btnEditar\" href=\"/fuerzaventa/editar/" + data.Codigo + "\"  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Editar\"><span class=\"fa fa-pencil-square-o fa-2x\"></span></a>");
+                        //visualizar
+                        //curCell = $('td', row).eq(8);
+                        //curCell.html("<a  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Visualizar\" onclick=\"detalle('" + data.Codigo + "');\"><span class=\"fa fa-search fa-2x\"></span></a>");
+                        //Eliminar
+                        curCell = $('td', row).eq(8);
+                        curCell.html("<a  data-toggle=\"tooltip\" data-placement=\"top\" title=\"Eliminar\" onclick=\"eliminar('" + data.Codigo + "');\"><span class=\"fa fa-minus-square-o fa-2x\"></span></a>");
+                    }
+                });
+            }
+
+
+        });
+
+
+        function eliminar(id) {
+            curRow = id;
+            $('#dlgDel').modal("show");
+            $('#btnDel').attr("href", "/fuerzaventa/eliminar/" + curRow);
+
+        }
+
+        //función editar registro
+        function editar(id) {
+            curRow = id;
+            $('#mensaje').html(mensaje);
+            $('#dlgInfo').modal("show");
+        }
+
+        //función visualizar el detalle
+        function detalle(id) {
+            curRow = id;
+            $('#modaldetalle').find('.modal-body').html(spinner);
+            $('#modaldetalle').on('shown.bs.modal', function (e) {
+                $(this).find('.modal-body').load("/fuerzaventa/visualizar/" + curRow);
+            }).modal("show");
+
+        }
+        //función confirmar la eliminación del registro
+        $('#btnDel').click(function () {
+            $('#dlgDel').modal("hide");
+        });
+        //cerrar la pantalla de confirmación
+        $("#closeAlert").click(function () {
+            $("#divAlert").hide();
+        });
+        //iniciar las alertas ocultas
+        $("#dlgAlert").hide();
+        //boton para ocultar un modal
+        $('#btnSalir').click(function () {
+            $('#modaldetalle').modal("hide");
+        });
+
+    </script>
+}
